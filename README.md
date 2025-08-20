@@ -22,10 +22,11 @@ Antes de ejecutar el código asegúrese de tener instalado:
 * **GCC** (compilador de C)
 
 Verifique con:
-´´´bash
+```bash
 flex --version
 bison --version
 gcc --version
+```
 ---
 
 ### 🚀 Instrucciones de Compilación y Ejecución
