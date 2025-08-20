@@ -1,32 +1,27 @@
-Aquí tienes tu README perfeccionado, con mejoras en redacción, estructura y estilo, manteniendo un tono claro, formal y técnico:
-
----
-
 # Flex & Bison – Capítulo 1
 
-## Tarea: Primeros Pasos con Flex y Bison
 
 ### Descripción General
 
-Este repositorio documenta el desarrollo de los **ejemplos y ejercicios del Capítulo 1** del libro *Flex & Bison* (O’Reilly).
-El propósito es adquirir familiaridad con los fundamentos de **Flex** y **Bison**, ejecutando programas en un entorno Linux y resolviendo ejercicios que extienden sus capacidades.
+Este repositorio documenta los **ejemplos y ejercicios del Capítulo 1** del libro *Flex & Bison* (O’Reilly).
+El propósito es adquirir experiencia práctica en el uso de **Flex** y **Bison**, construyendo analizadores léxicos y sintácticos básicos que sirvan de base para aplicaciones más complejas.
 
-El trabajo se organiza en dos fases:
+Se trabajó en dos fases:
 
-1. **Ejemplos guiados (1-1 a 1-5):** análisis, compilación y ejecución.
-2. **Ejercicios propuestos:** ampliación de funcionalidades como comentarios, operadores bitwise, manejo de hexadecimales, entre otros.
+1. **Ejemplos guiados (1-1 a 1-5):** implementación, compilación y análisis de resultados.
+2. **Ejercicios propuestos:** extensión de funcionalidades como manejo de comentarios, operadores adicionales y soporte para otros formatos numéricos.
 
 ---
 
 ### Requisitos Previos
 
-Antes de compilar y ejecutar los programas, verifique que su entorno incluye:
+Es necesario contar con las siguientes herramientas en el entorno Linux:
 
 * **Flex**
 * **Bison**
-* **GCC** (compilador de C)
+* **GCC**
 
-Comprobación:
+Verificación:
 
 ```bash
 flex --version
@@ -36,102 +31,213 @@ gcc --version
 
 ---
 
-### Compilación y Ejecución
-
-**Ejemplo general con Flex:**
-
-```bash
-flex archivo.l
-gcc lex.yy.c -lfl -o salida
-./salida
-```
-
-**Con Flex + Bison:**
-
-```bash
-bison -d archivo.y
-flex archivo.l
-gcc archivo.tab.c lex.yy.c -lfl -o salida
-./salida
-```
+### Ejemplos
 
 ---
 
-### Ejemplos (Capítulo 1)
+#### **Ejemplo 1-1: Reconocimiento básico de tokens**
 
-* **Ejemplo 1-1:** Reconocimiento básico de tokens.
+**Descripción:** Analizador que cuenta líneas, palabras y caracteres en un archivo de texto.
 
-  * Ejecución:
+**Explicación breve:** Reconoce secuencias de caracteres alfabéticos como palabras y aplica un conteo acumulativo, similar al programa `wc` de Unix.
 
-    ```bash
-    flex ejemplo1.l
-    gcc lex.yy.c -lfl -o ejemplo1
-    ./ejemplo1 < archivo.txt
-    ```
-  * Entrada:
+**Ejecución:**
 
-    ```
-    Hola mundo
-    Adiós mundo
-    ```
-  * Resultados:
-
-    ```
-    Líneas: 2  Palabras: 4  Caracteres: 21
-    ```
-  * Notas:
-
-    * Flex automatiza el conteo de tokens sin necesidad de programar manualmente el bucle de lectura.
-    * El patrón `[a-zA-Z]+` reconoce palabras en inglés, pero no incluye caracteres con acentos ni símbolos especiales.
-    * Comparado con la versión en C, el código es más conciso y legible.
-
-* **Ejemplo 1-2:** Introducción a patrones simples.
-  *Descripción
-
-Este ejercicio implementa un escáner léxico en Flex que traduce y transforma palabras específicas del inglés británico al inglés americano, además de realizar algunas sustituciones semánticas simples.
-
-Compilación y ejecución
-flex Ejemplo_2.l
-cc lex.yy.c -lfl
+```bash
+flex Ejemplo_1.l
+gcc lex.yy.c -lfl -o Ejemplo_1
 ./a.out
+```
 
-Ejemplo de uso
+**Entrada:**
 
-Entrada:
+```
+Hola mundo
+Adiós mundo
+```
 
-colour flavour clever smart conservative
+**Salida:**
 
+```
+Líneas: 2  Palabras: 4  Caracteres: 21
+```
 
-Salida:
+**Notas:**
 
-Version USA: color Version USA: flavor Version: Usa: smart Version usa: elegant Version Usa: liberal
+* Uso de patrones regulares simples (`[a-zA-Z]+`) para identificar palabras.
+* Limitación: no se consideran acentos ni símbolos especiales.
 
-Notas:
+---
 
-Se observa cómo el escáner realiza sustituciones directas de cadenas.
+#### **Ejemplo 1-2: Traducción de variantes del inglés**
 
-El resultado evidencia la diferencia de uso entre variantes del inglés.
+**Descripción:** Escáner que transforma palabras del inglés británico a su equivalente en inglés americano.
 
-La salida corresponde a las reglas definidas en el archivo Ejemplo_2.l.
+**Explicación breve:** Cada coincidencia de palabra es sustituida directamente por su forma equivalente predefinida.
 
-* **Ejemplo 1-3:** Uso de expresiones regulares.
-* 
+**Ejecución:**
 
-* **Ejemplo 1-4:** Comparación entre escáner manual y generado por Flex.
+```bash
+flex Ejemplo_2.l
+gcc lex.yy.c -lfl -o Ejemplo_2
+./a.out
+```
 
-* **Ejemplo 1-5:** Implementación de una calculadora simple.
+**Entrada:**
+
+```
+colour
+flavour
+clever
+smart
+conservative
+```
+
+**Salida:**
+
+```
+Version USA: color
+Version USA: flavor
+Version: Usa: smart
+Version usa: elegant
+Version Usa: liberal
+```
+
+**Notas:**
+
+* Ejemplo de sustitución directa de cadenas.
+* Ilustra la diferencia entre variantes lingüísticas del inglés.
+
+---
+
+#### **Ejemplo 1-3: Reconocimiento de operadores y números**
+
+**Descripción:** Escáner que reconoce números, operadores aritméticos y clasifica cualquier carácter no contemplado como “misterioso”.
+
+**Explicación breve:** Se aplican reglas específicas para operadores y números enteros; un patrón general captura caracteres no reconocidos.
+
+**Ejecución:**
+
+```bash
+flex Ejemplo_3.l
+gcc lex.yy.c -lfl -o Ejemplo_3
+./a.out
+```
+
+**Entrada:**
+
+```
+2+2
+23*34
+76/we
+```
+
+**Salida:**
+
+```
+NUMBER 2
+PLUS
+NUMBER 2
+
+NEWLINE
+NUMBER 23
+TIMES
+NUMBER 34
+
+NEWLINE
+NUMBER 76
+DIVIDE
+Mystery character w
+Mystery character e
+
+NEWLINE
+```
+
+**Notas:**
+
+* El programa cumple con la identificación de reglas definidas.
+* Todo carácter fuera de las reglas es correctamente clasificado como “misterioso”.
+
+---
+
+#### **Ejemplo 1-4: Definición explícita de tokens**
+
+**Descripción:** Extiende el reconocimiento léxico para asociar cada token con un valor numérico único y transmitirlo a fases posteriores.
+
+**Explicación breve:** Los números se almacenan en `yylval` para ser consumidos posteriormente; operadores y caracteres no reconocidos se diferencian mediante tokens numéricos y mensajes de error.
+
+**Ejecución:**
+
+```bash
+flex Ejemplo_4.l
+gcc lex.yy.c -lfl -o Ejemplo_4
+./a.out
+```
+
+**Entrada:**
+
+```
+a / 56 + 75
+```
+
+**Salida:**
+
+```
+Mystery character a
+262
+258 = 56
+259
+258 = 75
+264
+```
+
+**Notas:**
+
+* Se observa cómo Flex prepara la información para que un parser (Bison) procese expresiones completas.
+* Diferencia entre tokens con valor ( numeros ) y tokens simbólicos (operadores).
+
+---
+
+#### **Ejemplo 1-5: Calculadora con Flex y Bison**
+
+**Descripción:** Implementación de una calculadora simple con precedencia de operadores.
+
+**Explicación breve:** Se utiliza un analizador sintáctico (Bison) que procesa los tokens generados por Flex, aplicando las reglas de precedencia para obtener el resultado de expresiones aritméticas.
+
+**Compilación manual:**
+
+```bash
+bison -d Ejemplo_5.y
+flex Ejemplo_5.l
+gcc Ejemplo_5.tab.c lex.yy.c -lfl -o Ejemplo_5
+./a.out
+```
+
+**Entrada y salida esperada:**
+
+```
+2 + 3 * 4    → = 14
+2 * 3 + 4    → = 10
+20 / 4 - 2   → = 3
+```
+
+**Notas:**
+
+* Requiere `gcc` en lugar de `cc` para evitar errores de enlace.
+* Se valida la precedencia de operadores: `*` y `/` tienen mayor prioridad que `+` y `-`.
+* Los errores de sintaxis son reportados por la función `yyerror`.
 
 ---
 
 ### Ejercicios Resueltos
 
 1. **Manejo de comentarios:** Soporte para ignorar líneas comentadas.
-2. **Calculadora hexadecimal:** Extensión para procesar números hexadecimales mediante `strtol`.
-3. **Operadores bitwise:** Inclusión de operadores `&` y `|`.
-4. **Comparación manual vs. Flex:** Evaluación de eficiencia y claridad de código.
-5. **Limitaciones de Flex:** Discusión sobre lenguajes no regulares y sus restricciones.
-6. **Conteo de palabras en C:** Contraste de desempeño frente a la implementación con Flex.
+2. **Calculadora hexadecimal:** Procesamiento de números hexadecimales con `strtol`.
+3. **Operadores bitwise:** Inclusión de `&` y `|`.
+4. **Comparación manual vs. Flex:** Diferencias en claridad y eficiencia.
+5. **Limitaciones de Flex:** Lenguajes no regulares no son analizables.
+6. **Conteo de palabras en C:** Comparación de desempeño contra Flex.
 
 ---
 
-¿Quieres que lo deje en este formato más **documentativo** (como guía de estudio), o lo transformo en un README más **ejecutivo y corporativo**, con bullets cortos y orientado a resultados?
+¿Quieres que lo deje listo como **archivo `README.md` final** (con formato Markdown ya pulido), o prefieres que lo convierta en un **documento más académico en PDF** para entregar como reporte de práctica?
