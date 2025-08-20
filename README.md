@@ -53,6 +53,27 @@ gcc archivo.tab.c lex.yy.c -lfl -o salida
 ### Ejemplos (Capítulo 1)
 
 * **Ejemplo 1-1:** Reconocimiento básico de tokens.
+Ejecución:
+
+flex ejemplo1.l
+gcc lex.yy.c -lfl -o ejemplo1
+./ejemplo1 < archivo.txt
+
+
+Salida:
+
+Hola mundo
+Adiós mundo
+
+Resultado:
+Lineas: 2 Palabras: 4 Caracteres: 21
+
+
+Notas:
+Flex simplifica el conteo automático de tokens de texto sin necesidad de programar manualmente el bucle de lectura.
+El reconocimiento de palabras mediante [a-zA-Z]+ funciona bien, aunque no cuenta palabras con acentos o caracteres especiales.
+
+Este ejemplo conecta directamente con el ejercicio de conteo de palabras en C, pero con menos código y mayor claridad.
 * **Ejemplo 1-2:** Introducción a patrones simples.
 * **Ejemplo 1-3:** Uso de expresiones regulares.
 * **Ejemplo 1-4:** Comparación entre escáner manual y generado.
