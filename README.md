@@ -68,7 +68,7 @@ gcc archivo.tab.c lex.yy.c -lfl -o salida
     gcc lex.yy.c -lfl -o ejemplo1
     ./ejemplo1 < archivo.txt
     ```
-  * Salida esperada:
+  * Entrada:
 
     ```
     Hola mundo
@@ -106,7 +106,7 @@ Salida:
 
 Version USA: color Version USA: flavor Version: Usa: smart Version usa: elegant Version Usa: liberal
 
-Comentarios
+Notas:
 
 Se observa cómo el escáner realiza sustituciones directas de cadenas.
 
@@ -115,6 +115,7 @@ El resultado evidencia la diferencia de uso entre variantes del inglés.
 La salida corresponde a las reglas definidas en el archivo Ejemplo_2.l.
 
 * **Ejemplo 1-3:** Uso de expresiones regulares.
+* 
 
 * **Ejemplo 1-4:** Comparación entre escáner manual y generado por Flex.
 
