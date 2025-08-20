@@ -1,9 +1,3 @@
-Perfecto ✅. Te armo un **README.md** inicial para tu repositorio de la tarea. Lo estructuro de forma profesional y claro, siguiendo las pautas que te piden: explicación del trabajo, ejemplos, ejercicios, instrucciones de compilación y reflexiones.
-
-Aquí tienes el borrador:
-
----
-
 # Flex & Bison – Capítulo 1
 
 ## Tarea: Primeros Pasos con Flex y Bison
@@ -33,30 +27,6 @@ Verifique con:
 flex --version
 bison --version
 gcc --version
-```
-
----
-
-### 📂 Estructura del Repositorio
-
-```
-├── ejemplos/
-│   ├── ejemplo_1_1.l
-│   ├── ejemplo_1_2.l
-│   ├── ejemplo_1_3.l
-│   ├── ejemplo_1_4.l
-│   └── ejemplo_1_5.l
-│
-├── ejercicios/
-│   ├── comentarios.l
-│   ├── calculadora_hex.l
-│   ├── calculadora_bitwise.l
-│   ├── wc_flex.l
-│   └── wc_c.c
-│
-└── README.md
-```
-
 ---
 
 ### 🚀 Instrucciones de Compilación y Ejecución
@@ -88,10 +58,6 @@ gcc archivo.tab.c lex.yy.c -lfl -o salida
 * **Ejemplo 1-4:** Comparación entre escáner manual y generado.
 * **Ejemplo 1-5:** Calculadora simple.
 
-Cada ejemplo está documentado en su respectivo archivo con comentarios explicativos y pruebas de ejecución.
-
----
-
 ### 📝 Ejercicios Resueltos
 
 1. **Manejo de comentarios:** Ajuste del escáner para aceptar líneas con comentarios.
@@ -109,19 +75,4 @@ Cada ejemplo está documentado en su respectivo archivo con comentarios explicat
 * Algunos ejemplos generan advertencias en compiladores modernos, lo cual requirió ajustes menores.
 * En los ejercicios de calculadora, el reto estuvo en diferenciar operadores con doble propósito (`|`).
 * La comparación entre Flex y C puro mostró diferencias claras en velocidad y facilidad de depuración.
-
----
-
-### 👤 Autor
-
-* Nombre: *\[Tu Nombre]*
-* Curso: *\[Nombre del curso]*
-* Fecha de entrega: *19 de agosto de 2025*
-
----
-
-📌 Este README está diseñado como **esqueleto**: puedes ir completando cada ejemplo con capturas de salida y tus observaciones personales.
-
----
-
 👉 ¿Quieres que te prepare también los **archivos base de los ejemplos (ejemplo\_1\_1.l, ejemplo\_1\_2.l, etc.)** con el código del libro ya escrito, para que solo los ejecutes y documentes?
