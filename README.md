@@ -2,7 +2,7 @@
 
 ## Tarea: Primeros Pasos con Flex y Bison
 
-### 📌 Descripción General
+### Descripción General
 
 Este repositorio contiene el desarrollo de los ejemplos y ejercicios del **Capítulo 1** del libro *Flex & Bison* (O’Reilly). El objetivo es familiarizarse con los conceptos fundamentales de Flex y Bison, analizando ejemplos básicos, ejecutándolos en un entorno Linux y resolviendo ejercicios prácticos que expanden la funcionalidad de los programas.
 
@@ -13,7 +13,7 @@ El trabajo se divide en dos fases:
 
 ---
 
-### ⚙️ Requisitos Previos
+### Requisitos Previos
 
 Antes de ejecutar el código asegúrese de tener instalado:
 
@@ -29,7 +29,7 @@ gcc --version
 ```
 ---
 
-### 🚀 Instrucciones de Compilación y Ejecución
+### Instrucciones de Compilación y Ejecución
 
 Ejemplo general para cualquier archivo `.l`:
 
@@ -50,7 +50,7 @@ gcc archivo.tab.c lex.yy.c -lfl -o salida
 
 ---
 
-### 📖 Ejemplos (Capítulo 1)
+### Ejemplos (Capítulo 1)
 
 * **Ejemplo 1-1:** Reconocimiento básico de tokens.
 * **Ejemplo 1-2:** Introducción a patrones simples.
@@ -58,7 +58,7 @@ gcc archivo.tab.c lex.yy.c -lfl -o salida
 * **Ejemplo 1-4:** Comparación entre escáner manual y generado.
 * **Ejemplo 1-5:** Calculadora simple.
 
-### 📝 Ejercicios Resueltos
+### Ejercicios Resueltos
 
 1. **Manejo de comentarios:** Ajuste del escáner para aceptar líneas con comentarios.
 2. **Calculadora Hexadecimal:** Implementación de soporte para números hexadecimales con `strtol`.
@@ -69,10 +69,3 @@ gcc archivo.tab.c lex.yy.c -lfl -o salida
 
 ---
 
-### 💡 Reflexiones y Desafíos
-
-* La principal dificultad inicial fue configurar el entorno de compilación.
-* Algunos ejemplos generan advertencias en compiladores modernos, lo cual requirió ajustes menores.
-* En los ejercicios de calculadora, el reto estuvo en diferenciar operadores con doble propósito (`|`).
-* La comparación entre Flex y C puro mostró diferencias claras en velocidad y facilidad de depuración.
-👉 ¿Quieres que te prepare también los **archivos base de los ejemplos (ejemplo\_1\_1.l, ejemplo\_1\_2.l, etc.)** con el código del libro ya escrito, para que solo los ejecutes y documentes?
