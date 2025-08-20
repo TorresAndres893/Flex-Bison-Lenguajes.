@@ -210,7 +210,7 @@ Mystery character a
 bison -d Ejemplo_5.y
 flex Ejemplo_5.l
 gcc Ejemplo_5.tab.c lex.yy.c -lfl -o Ejemplo_5
-./a.out
+./Ejemplo_5
 ```
 
 **Entrada y salida esperada:**
@@ -220,7 +220,23 @@ gcc Ejemplo_5.tab.c lex.yy.c -lfl -o Ejemplo_5
 2 * 3 + 4    → = 10
 20 / 4 - 2   → = 3
 ```
+**Error Presentado**
 
+
+El libro usa cc, pero en muchos sistemas modernos este comando no está disponible, por lo que debe sustituirse por gcc. Al ejecutar el ejemplo con cc, se obtuvo el error:
+```bash
+Ejemplo_5:: command not found
+/usr/bin/ld: ... undefined reference to `yylval'
+collect2: error: ld returned 1 exit status
+```
+
+Esto ocurre porque flex y bison generan archivos que dependen de yylval, definido en el parser (.tab.c y .tab.h). Si no se compilan juntos, el linker no encuentra esa referencia.
+La corrección es compilar con:
+```bash
+bison -d Ejemplo_5.y
+flex Ejemplo_5.l
+gcc Ejemplo_5.tab.c lex.yy.c -lfl -o Ejemplo_5
+```
 **Notas:**
 
 * Requiere `gcc` en lugar de `cc` para evitar errores de enlace.
