@@ -23,7 +23,6 @@ Antes de ejecutar el código asegúrese de tener instalado:
 
 Verifique con:
 
-```bash
 flex --version
 bison --version
 gcc --version
