@@ -246,14 +246,88 @@ gcc Ejemplo_5.tab.c lex.yy.c -lfl -o Ejemplo_5
 ---
 
 ### Ejercicios Resueltos
-
-1. **Manejo de comentarios:** Soporte para ignorar líneas comentadas.
-2. **Calculadora hexadecimal:** Procesamiento de números hexadecimales con `strtol`.
-3. **Operadores bitwise:** Inclusión de `&` y `|`.
-4. **Comparación manual vs. Flex:** Diferencias en claridad y eficiencia.
-5. **Limitaciones de Flex:** Lenguajes no regulares no son analizables.
-6. **Conteo de palabras en C:** Comparación de desempeño contra Flex.
+Perfecto 👍. Aquí te dejo el **README** más compacto, manteniendo las **preguntas originales**, las **respuestas** y solo la **esencia de la explicación**.
 
 ---
 
-¿Quieres que lo deje listo como **archivo `README.md` final** (con formato Markdown ya pulido), o prefieres que lo convierta en un **documento más académico en PDF** para entregar como reporte de práctica?
+# **Ejercicios Resueltos**
+
+---
+
+## 1. Manejo de comentarios
+
+**Pregunta:** ¿Aceptará la calculadora una línea que contenga solo un comentario? ¿Por qué no? ¿Sería más fácil corregir esto en el scanner o en el parser?
+**Respuesta:** No, porque el parser espera un token válido y el scanner descarta el comentario.
+**Explicación:** Lo más simple es ignorarlo en el scanner:
+
+```lex
+"//".*   { /* Ignorar comentario */ }
+```
+
+---
+
+## 2. Calculadora hexadecimal
+
+**Pregunta:** Convierte la calculadora en una calculadora hexadecimal que acepte hex y decimales.
+**Respuesta:** Sí, usando `strtol` en el scanner y ajustando `printf` en el parser.
+**Explicación:**
+
+```lex
+0x[0-9a-fA-F]+ { yylval = strtol(yytext, NULL, 16); return NUMBER; }
+```
+
+```c
+printf("Resultado: %d (0x%X)\n", resultado, resultado);
+```
+
+---
+
+## 3. Operadores bitwise
+
+**Pregunta:** Agrega AND y OR. ¿Qué ocurre si `|` se usa como OR y como ABS?
+**Respuesta:** Puede generar ambigüedad, pero se distingue por contexto.
+**Explicación:**
+
+```lex
+"&" return AND; "|" return OR;
+```
+
+```yacc
+exp: exp AND exp { $$ = $1 & $3; }
+   | exp OR exp  { $$ = $1 | $3; }
+```
+
+---
+
+## 4. Comparación manual vs. Flex
+
+**Pregunta:** ¿El scanner manual reconoce lo mismo que Flex?
+**Respuesta:** No.
+**Explicación:** El manual falla en espacios y caracteres imprevistos; Flex es más robusto.
+
+---
+
+## 5. Limitaciones de Flex
+
+**Pregunta:** ¿Lenguajes donde Flex no sirve?
+**Respuesta:** Sí, los que dependen de contexto (ej. Python con indentación).
+
+---
+
+## 6. Conteo de palabras en C
+
+**Pregunta:** Reescribe el programa y compara. ¿Es más rápido en C? ¿Más difícil de depurar?
+**Respuesta:** Sí, más rápido pero menos flexible y más duro de depurar.
+**Código:**
+
+```c
+#include <stdio.h>
+#include <ctype.h>
+int main(void)
+{int c,in=0,cnt=0;
+while((c=getchar())!=EOF){
+if(isspace(c))in=0;
+else if(!in){
+in=1;cnt++;}}
+printf("Palabras: %d\n",cnt);}
+```
