@@ -22,7 +22,7 @@ Antes de ejecutar el código asegúrese de tener instalado:
 * **GCC** (compilador de C)
 
 Verifique con:
-
+´´´bash
 flex --version
 bison --version
 gcc --version
